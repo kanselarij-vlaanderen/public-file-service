@@ -15,6 +15,7 @@ end
 configure do
   set :relative_storage_path, (ENV['MU_APPLICATION_FILE_STORAGE_PATH'] || '').chomp('/')
   set :storage_path, "/share/#{(ENV['MU_APPLICATION_FILE_STORAGE_PATH'] || '')}".chomp('/')
+  set :file_resource_base, (ENV['FILE_RESOURCE_BASE'] || '')
 end
 
 file_magic = FileMagic.new(FileMagic::MAGIC_MIME)
@@ -28,8 +29,6 @@ NFO = RDF::Vocabulary.new('http://www.semanticdesktop.org/ontologies/2007/03/22/
 NIE = RDF::Vocabulary.new('http://www.semanticdesktop.org/ontologies/2007/01/19/nie#')
 DBPEDIA = RDF::Vocabulary.new('http://dbpedia.org/ontology/')
 EXT = RDF::Vocabulary.new('http://mu.semte.ch/vocabularies/ext/')
-
-FILE_SERVICE_RESOURCE_BASE = 'http://mu.semte.ch/services/file-service'
 
 
 ###
