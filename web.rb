@@ -50,7 +50,7 @@ get '/files/:id' do
   query += "        <#{DBPEDIA.fileExtension}> ?extension ;"
   query += "        <#{NFO.fileSize}> ?size ."
   query += "   ?document <#{EXT.file}> ?uri."
-  query += "   ?document <#{EXT.toegangsniveauVoorDocumentVersie}> <http://kanselarij.vo.data.gift/id/concept/toegangs-niveaus/6ca49d86-d40f-46c9-bde3-a322aa7e5c8e>."
+  query += "   ?document <#{EXT.toegangsniveauVoorDocumentVersie}> <http://themis.vlaanderen.be/id/concept/toegangsniveau/c3de9c70-391e-4031-a85e-4b03433d6266>."
   query += " }"
   result = Mu::AuthSudo.query(query)
 
@@ -90,7 +90,7 @@ get '/files/:id/download' do
   query += "   ?uri <#{MU_CORE.uuid}> #{sparql_escape_string(params['id'])} ."
   query += "   ?fileUrl <#{NIE.dataSource}> ?uri ."
   query += "   ?document <#{EXT.file}> ?uri."
-  query += "   ?document <#{EXT.toegangsniveauVoorDocumentVersie}> <http://kanselarij.vo.data.gift/id/concept/toegangs-niveaus/6ca49d86-d40f-46c9-bde3-a322aa7e5c8e>."
+  query += "   ?document <#{EXT.toegangsniveauVoorDocumentVersie}> <http://themis.vlaanderen.be/id/concept/toegangsniveau/c3de9c70-391e-4031-a85e-4b03433d6266>."
   query += " }"
   result = Mu::AuthSudo.query(query)
 
