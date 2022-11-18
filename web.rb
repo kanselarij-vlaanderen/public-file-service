@@ -29,6 +29,7 @@ NFO = RDF::Vocabulary.new('http://www.semanticdesktop.org/ontologies/2007/03/22/
 NIE = RDF::Vocabulary.new('http://www.semanticdesktop.org/ontologies/2007/01/19/nie#')
 DBPEDIA = RDF::Vocabulary.new('http://dbpedia.org/ontology/')
 EXT = RDF::Vocabulary.new('http://mu.semte.ch/vocabularies/ext/')
+BESLUITVORMING = RDF::Vocabulary.new('http://data.vlaanderen.be/ns/besluitvorming#')
 
 
 ###
@@ -49,7 +50,7 @@ get '/files/:id' do
   query += "        <#{DBPEDIA.fileExtension}> ?extension ;"
   query += "        <#{NFO.fileSize}> ?size ."
   query += "   ?document <#{EXT.file}> ?uri."
-  query += "   ?document <#{EXT.toegangsniveauVoorDocumentVersie}> <http://themis.vlaanderen.be/id/concept/toegangsniveau/c3de9c70-391e-4031-a85e-4b03433d6266>."
+  query += "   ?document <#{BESLUITVORMING.vertrouwelijkheidsniveau}> <http://themis.vlaanderen.be/id/concept/toegangsniveau/c3de9c70-391e-4031-a85e-4b03433d6266>."
   query += " }"
   result = Mu::AuthSudo.query(query)
 
@@ -89,7 +90,7 @@ get '/files/:id/download' do
   query += "   ?uri <#{MU_CORE.uuid}> #{sparql_escape_string(params['id'])} ."
   query += "   ?fileUrl <#{NIE.dataSource}> ?uri ."
   query += "   ?document <#{EXT.file}> ?uri."
-  query += "   ?document <#{EXT.toegangsniveauVoorDocumentVersie}> <http://themis.vlaanderen.be/id/concept/toegangsniveau/c3de9c70-391e-4031-a85e-4b03433d6266>."
+  query += "   ?document <#{BESLUITVORMING.vertrouwelijkheidsniveau}> <http://themis.vlaanderen.be/id/concept/toegangsniveau/c3de9c70-391e-4031-a85e-4b03433d6266>."
   query += " }"
   result = Mu::AuthSudo.query(query)
 
