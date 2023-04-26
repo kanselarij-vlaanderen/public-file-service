@@ -28,7 +28,7 @@ DC = RDF::Vocab::DC
 NFO = RDF::Vocabulary.new('http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#')
 NIE = RDF::Vocabulary.new('http://www.semanticdesktop.org/ontologies/2007/01/19/nie#')
 DBPEDIA = RDF::Vocabulary.new('http://dbpedia.org/ontology/')
-BESLUITVORMING = RDF::Vocabulary.new('http://data.vlaanderen.be/ns/besluitvorming#')
+BESLUITVORMING = RDF::Vocabulary.new('https://data.vlaanderen.be/ns/besluitvorming#')
 PROV = RDF::Vocabulary.new('http://www.w3.org/ns/prov#')
 
 
