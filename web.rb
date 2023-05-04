@@ -52,8 +52,8 @@ get '/files/:id' do
   query += "        <#{DC.format}> ?format ;"
   query += "        <#{DBPEDIA.fileExtension}> ?extension ;"
   query += "        <#{NFO.fileSize}> ?size ."
-  query += "   ?document <#{PROV.value}> ?uri."
   unless ENV['SKIP_CONFIDENTIALITY']
+    query += "   ?document <#{PROV.value}> ?uri."
     query += "   ?document <#{BESLUITVORMING.vertrouwelijkheidsniveau}> <http://themis.vlaanderen.be/id/concept/toegangsniveau/c3de9c70-391e-4031-a85e-4b03433d6266>."
   end
   if ENV['SPECIFIED_GRAPH']
@@ -100,8 +100,8 @@ get '/files/:id/download' do
   end
   query += "   ?uri <#{MU_CORE.uuid}> #{sparql_escape_string(params['id'])} ."
   query += "   ?fileUrl <#{NIE.dataSource}> ?uri ."
-  query += "   ?document <#{PROV.value}> ?uri."
   unless ENV['SKIP_CONFIDENTIALITY']
+    query += "   ?document <#{PROV.value}> ?uri."
     query += "   ?document <#{BESLUITVORMING.vertrouwelijkheidsniveau}> <http://themis.vlaanderen.be/id/concept/toegangsniveau/c3de9c70-391e-4031-a85e-4b03433d6266>."
   end
   if ENV['SPECIFIED_GRAPH']
