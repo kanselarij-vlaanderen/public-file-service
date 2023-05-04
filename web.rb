@@ -44,13 +44,21 @@ get '/files/:id' do
   error('X-Rewrite-URL header is missing.') if rewrite_url.nil?
 
   query = " SELECT ?uri ?name ?format ?size ?extension WHERE {"
+  if ENV['SPECIFIED_GRAPH']
+    query += "   GRAPH <#{ENV['SPECIFIED_GRAPH']}> {"
+  end
   query += "   ?uri <#{MU_CORE.uuid}> #{sparql_escape_string(params['id'])} ;"
   query += "        <#{NFO.fileName}> ?name ;"
   query += "        <#{DC.format}> ?format ;"
   query += "        <#{DBPEDIA.fileExtension}> ?extension ;"
   query += "        <#{NFO.fileSize}> ?size ."
   query += "   ?document <#{PROV.value}> ?uri."
-  query += "   ?document <#{BESLUITVORMING.vertrouwelijkheidsniveau}> <http://themis.vlaanderen.be/id/concept/toegangsniveau/c3de9c70-391e-4031-a85e-4b03433d6266>."
+  unless ENV['SKIP_CONFIDENTIALITY']
+    query += "   ?document <#{BESLUITVORMING.vertrouwelijkheidsniveau}> <http://themis.vlaanderen.be/id/concept/toegangsniveau/c3de9c70-391e-4031-a85e-4b03433d6266>."
+  end
+  if ENV['SPECIFIED_GRAPH']
+    query += "   }"
+  end
   query += " }"
   result = Mu::AuthSudo.query(query)
 
@@ -87,10 +95,18 @@ end
 ###
 get '/files/:id/download' do
   query = " SELECT ?fileUrl WHERE {"
+  if ENV['SPECIFIED_GRAPH']
+    query += "   GRAPH <#{ENV['SPECIFIED_GRAPH']}> {"
+  end
   query += "   ?uri <#{MU_CORE.uuid}> #{sparql_escape_string(params['id'])} ."
   query += "   ?fileUrl <#{NIE.dataSource}> ?uri ."
   query += "   ?document <#{PROV.value}> ?uri."
-  query += "   ?document <#{BESLUITVORMING.vertrouwelijkheidsniveau}> <http://themis.vlaanderen.be/id/concept/toegangsniveau/c3de9c70-391e-4031-a85e-4b03433d6266>."
+  unless ENV['SKIP_CONFIDENTIALITY']
+    query += "   ?document <#{BESLUITVORMING.vertrouwelijkheidsniveau}> <http://themis.vlaanderen.be/id/concept/toegangsniveau/c3de9c70-391e-4031-a85e-4b03433d6266>."
+  end
+  if ENV['SPECIFIED_GRAPH']
+    query += "   }"
+  end
   query += " }"
   result = Mu::AuthSudo.query(query)
 

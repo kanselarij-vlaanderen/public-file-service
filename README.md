@@ -2,3 +2,8 @@
 Microservice forked from [mu-semtech/file-service](https://github.com/mu-semtech/file-service) to download public files from Kaleidos. The service only exposes the GET endpoints of the file service and adds an additional check on the access level of the requested file. Only files with a public access level can be downloaded.
 
 For installation, configuration and usage, see the README of [mu-semtech/file-service](https://github.com/mu-semtech/file-service).
+
+Environment variables:
+
+`SPECIFIED_GRAPH`: specify the graph to query for public files (default: empty)
+`SKIP_CONFIDENTIALITY`: skip the check for confidentiality (default: false, so the service will always check whether documents are confidential)
