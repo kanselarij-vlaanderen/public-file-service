@@ -28,6 +28,7 @@ DC = RDF::Vocab::DC
 NFO = RDF::Vocabulary.new('http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#')
 NIE = RDF::Vocabulary.new('http://www.semanticdesktop.org/ontologies/2007/01/19/nie#')
 DBPEDIA = RDF::Vocabulary.new('http://dbpedia.org/ontology/')
+BESLUITVORMING = RDF::Vocabulary.new('https://data.vlaanderen.be/ns/besluitvorming#')
 PROV = RDF::Vocabulary.new('http://www.w3.org/ns/prov#')
 
 
@@ -49,7 +50,7 @@ get '/files/:id' do
   query += "        <#{DBPEDIA.fileExtension}> ?extension ;"
   query += "        <#{NFO.fileSize}> ?size ."
   query += "   ?document <#{PROV.value}> ?uri."
-  query += "   ?document <http://mu.semte.ch/vocabularies/ext/toegangsniveauVoorDocumentVersie> <http://themis.vlaanderen.be/id/concept/toegangsniveau/c3de9c70-391e-4031-a85e-4b03433d6266>."
+  query += "   ?document <#{BESLUITVORMING.vertrouwelijkheidsniveau}> <http://themis.vlaanderen.be/id/concept/toegangsniveau/c3de9c70-391e-4031-a85e-4b03433d6266>."
   query += " }"
   result = Mu::query(query)
 
@@ -89,7 +90,7 @@ get '/files/:id/download' do
   query += "   ?uri <#{MU_CORE.uuid}> #{Mu::sparql_escape_string(params['id'])} ."
   query += "   ?fileUrl <#{NIE.dataSource}> ?uri ."
   query += "   ?document <#{PROV.value}> ?uri."
-  query += "   ?document <http://mu.semte.ch/vocabularies/ext/toegangsniveauVoorDocumentVersie> <http://themis.vlaanderen.be/id/concept/toegangsniveau/c3de9c70-391e-4031-a85e-4b03433d6266>."
+  query += "   ?document <#{BESLUITVORMING.vertrouwelijkheidsniveau}> <http://themis.vlaanderen.be/id/concept/toegangsniveau/c3de9c70-391e-4031-a85e-4b03433d6266>."
   query += " }"
   result = Mu::query(query)
 
