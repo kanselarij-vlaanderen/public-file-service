@@ -56,7 +56,7 @@ get '/files/:id' do
   end
   query += "   }" if ENV['SPECIFIED_GRAPH']
   query += " }"
-  result = Mu::query(query)
+  result = Mu::query(query, sudo: true)
 
   return status 404 if result.empty?
   result = result.first
@@ -101,7 +101,7 @@ get '/files/:id/download' do
   end
   query += "   }" if ENV['SPECIFIED_GRAPH']
   query += " }"
-  result = Mu::query(query)
+  result = Mu::query(query, sudo: true)
 
   return status 404 if result.empty?
 
