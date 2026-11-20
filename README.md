@@ -3,6 +3,8 @@ Microservice forked from [mu-semtech/file-service](https://github.com/mu-semtech
 
 For installation, configuration and usage, see the README of [mu-semtech/file-service](https://github.com/mu-semtech/file-service).
 
+`GET /files/:id/download` accepts the optional `content-disposition` query parameter to serve the file inline instead of as an attachment, e.g. `/files/:id/download?content-disposition=inline`.
+
 Environment variables:
 
 `SPECIFIED_GRAPH`: specify the graph to query for public files (default: empty)

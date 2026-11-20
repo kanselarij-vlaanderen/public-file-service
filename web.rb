@@ -84,6 +84,7 @@ end
 # GET /files/:id/download?name=foo.pdf
 #
 # @param name [string] Optional name of the downloaded file
+# @param content-disposition [string] Optional Content-Disposition header value, 'inline' or 'attachment' (default)
 #
 # Returns 200 with the file content as attachment
 #         404 if a file with the given id cannot be found
@@ -109,8 +110,15 @@ get '/files/:id/download' do
 
   filename = params['name']
   filename ||= File.basename(path)
+
+  if params['content-disposition'] and params['content-disposition'].casecmp? 'inline'
+    disposition = 'inline'
+  else
+    disposition = 'attachment'
+  end
+
   if File.file?(path)
-    send_file path, disposition: 'attachment', filename: filename
+    send_file path, disposition: disposition, filename: filename
   else
     Mu::Helpers::error("Could not find file in path. Check if the physical file is available on the server and if this service has the right mountpoint.", 500)
   end
