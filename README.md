@@ -7,6 +7,8 @@ For installation, configuration and usage, see the README of [mu-semtech/file-se
 
 Environment variables:
 
+`ALLOW_MU_AUTH_SUDO`: **required**, must be set to `true` in the deployment. The service reads the files with sudo, and mu-ruby-template refuses sudo queries unless this flag is enabled. It is deliberately not set in the Dockerfile so that every stack has to opt in explicitly.
+
 `SPECIFIED_GRAPH`: specify the graph to query for public files (default: empty)
 
 `SKIP_CONFIDENTIALITY`: skip the check for confidentiality (default: false, so the service will always check whether documents are confidential)
