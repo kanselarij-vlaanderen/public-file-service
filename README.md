@@ -6,4 +6,5 @@ For installation, configuration and usage, see the README of [mu-semtech/file-se
 Environment variables:
 
 `SPECIFIED_GRAPH`: specify the graph to query for public files (default: empty)
+
 `SKIP_CONFIDENTIALITY`: skip the check for confidentiality (default: false, so the service will always check whether documents are confidential)
